@@ -1,0 +1,12 @@
+<header>
+  <h1><%= banner %></h1>
+  <nav>
+    <ul>
+      <% for( let i = 0; i < links.length; i++ ) { %>
+      <li>
+        <a href="<%= links[i].href %>"><%= links[i].text %></a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>

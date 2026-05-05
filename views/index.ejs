@@ -4,6 +4,16 @@
     <title>Homepage</title>
   </head>
   <body>
-    <h1><%= banner %></h1>
+    <%- include("header", {links: links}) %>
+    <h2><%- heading %></h2>
+    <% for( let i = 0; i < messages.length; i++ ) { %>
+    <div>
+      <%= messages[i].text %>
+      <%= messages[i].user %>
+      <%= messages[i].added %>
+      <a href="<%= i %>"><button>detail</button></a>
+    </div>
+    <% } %>
+    <%- include("footer") %>
   </body>
 </html>

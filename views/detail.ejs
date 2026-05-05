@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Detail</title>
+  </head>
+  <body>
+    <%- include("header", {links: links}) %>
+    <h2><%- heading %></h2>
+    <h3>
+      Author:
+      <%= message.user %>
+    </h3>
+    <p>Content: <%= message.text %></p>
+    <p>Sent at <%= message.added %></p>
+    <%- include("footer") %>
+  </body>
+</html>
