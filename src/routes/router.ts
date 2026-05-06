@@ -39,6 +39,9 @@ router.get("/new", (req: e.Request, res: e.Response) => {
 
 router.get("/:messageId", (req: e.Request, res: e.Response) => {
   const messageId = Number(req.params.messageId);
+  if (Number.isNaN(messageId)) {
+    return;
+  }
   res.render("detail", {
     banner: "Mini Message Board",
     links: links,
