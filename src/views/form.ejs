@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>New Message</title>
+    <title><%= title %></title>
   </head>
   <body>
-    <%- include("header") %>
-    <h2><%= heading %></h2>
+    <%- include("partials/header") %>
+    <h2>Message Input</h2>
     <form action="/new" method="post">
       <label for="author">Author: </label>
-      <input type="text" id="author" name="author" />
+      <input
+        type="text"
+        id="author"
+        name="author"
+        value="<%= locals.prev && prev.author %>"
+        required
+      />
       <label for="message">Message: </label>
-      <input type="text" id="message" name="message" />
+      <input
+        type="text"
+        id="text"
+        name="text"
+        value="<%= locals.prev && prev.text %>"
+        required
+      />
       <button type="submit">Send</button>
     </form>
-    <%- include("footer") %>
+    <%- include("partials/errors") %>
   </body>
 </html>

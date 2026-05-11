@@ -4,14 +4,15 @@
     <title>Detail</title>
   </head>
   <body>
-    <%- include("header", {links: links}) %>
-    <h2><%- heading %></h2>
+    <%- include("partials/header", {links: links}) %>
+    <h2>Contents</h2>
+    <% if (locals.message) { %>
     <h3>
       Author:
-      <%= message.user %>
+      <%= message.username %>
     </h3>
     <p>Content: <%= message.text %></p>
     <p>Sent at <%= message.added %></p>
-    <%- include("footer") %>
+    <% } %>
   </body>
 </html>

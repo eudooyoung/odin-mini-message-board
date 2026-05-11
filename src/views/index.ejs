@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Homepage</title>
+    <title><%= title %></title>
   </head>
   <body>
-    <%- include("header", {links: links}) %>
-    <h2><%- heading %></h2>
-    <% for( let i = 0; i < messages.length; i++ ) { %>
-    <div>
-      <%= messages[i].text %>
-      <%= messages[i].user %>
-      <%= messages[i].added %>
-      <a href="<%= i %>"><button>detail</button></a>
-    </div>
+    <%- include("partials/header", {links: links}) %>
+    <h2>Messages</h2>
+    <% if (locals.messages) { %>
+    <ul>
+      <% messages.forEach(message => { %>
+      <li style="list-style-type: none">
+        <span style="font-weight: bold"><%= message.username %>: </span>
+        <%= message.text %>
+        <a href="/<%= message.id %>"><button>Detail</button></a>
+      </li>
+      <% }) %>
+    </ul>
     <% } %>
-    <%- include("footer") %>
   </body>
 </html>

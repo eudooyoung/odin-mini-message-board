@@ -1,7 +1,7 @@
 <header>
-  <h1><%= banner %></h1>
+  <h1><%= title %></h1>
   <nav>
-    <ul>
+    <ul style="display: flex; gap: 2rem; list-style-type: none">
       <% for( let i = 0; i < links.length; i++ ) { %>
       <li>
         <a href="<%= links[i].href %>"><%= links[i].text %></a>
