@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 
 import pg = require("pg");
+import fs = require("node:fs");
 
 const SQL = `
 create table if not exists messages (
@@ -14,16 +15,28 @@ insert into messages (username, text)
 values ('Amando', 'Hi there!'), ('Charles', 'Hello World!');
 `;
 
-const DB_URL =
-  process.argv[2] === "local"
-    ? process.env.LOCAL_DB_URL
-    : process.env.PRODUCTION_DB_URL;
-
 const main = async () => {
   console.log("seeding...");
-  const client = new pg.Client({
-    connectionString: DB_URL,
-  });
+  let client: pg.Client;
+  if (process.argv[2] === "local") {
+    console.log("connecting local db...");
+    client = new pg.Client({
+      connectionString: process.env.LOCAL_DB_URL,
+    });
+  } else {
+    console.log("connecting remote db...");
+    client = new pg.Client({
+      user: process.env.REMOTE_DB_USER,
+      password: process.env.REMOTE_DB_PW,
+      host: process.env.REMOTE_DB_HOST,
+      port: Number(process.env.REMOTE_DB_PORT),
+      database: process.env.REMOTE_DB_NAME,
+      ssl: {
+        rejectUnauthorized: true,
+        ca: fs.readFileSync("./ca.pem").toString(),
+      },
+    });
+  }
   try {
     await client.connect();
     console.log("connected...");
